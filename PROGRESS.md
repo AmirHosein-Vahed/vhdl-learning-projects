@@ -17,6 +17,7 @@ project, README, or build-system item changes state.
 | `lib/util_pkg.vhd` | done | `clog2`, `sat_signed`, `count_ones`, `is_power_of_two` |
 | `lib/tb_pkg.vhd` | done | Protected-type counters, checks, `wait_cycles`, summary |
 | `scripts/new-project.sh` | done | Scaffolds a compiling project |
+| GitHub Actions CI | done | `.github/workflows/ci.yml`: check, lint, test on push/PR |
 | Root `README.md` | done | Prereqs, quick start, layout, learning path, roadmap |
 | Projects 01–04 | done | RTL + TB + Makefile + README, all passing |
 | READMEs 01–04 | done | All four project docs complete |
@@ -109,3 +110,4 @@ When finishing an item:
 | 2026-10-29 | Wrote project READMEs for 01, 02, 03; `make list` descriptions now populated |
 | 2026-10-29 | Wrote root `README.md` (prereqs, quick start, layout, build reference, roadmap) |
 | 2026-10-29 | Lessons 01–04 marked complete; full clean/check/lint/test passes |
+| 2026-10-29 | Added GitHub Actions CI (GHDL 5.0.1 mcode + GTKWave) on push/PR |

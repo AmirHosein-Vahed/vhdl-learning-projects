@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Lint and simulate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # GHDL 5.0.1 matches the version this repository is developed against.
+      # The mcode backend needs no LLVM/GCC toolchain, which keeps CI fast.
+      - name: Install GHDL 5.0.1 (mcode)
+        uses: ghdl/setup-ghdl@v1
+        with:
+          version: v5.0.1
+          backend: mcode
+
+      # make check verifies GTKWave as well, so install it even though the
+      # tests themselves are headless.
+      - name: Install GTKWave and Make
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends gtkwave make
+
+      - name: Verify toolchain
+        run: make check
+
+      - name: Analyze all projects with -Wall
+        run: make lint
+
+      - name: Run all self-checking testbenches
+        run: make test
+
+      # Keep the per-project logs when a job fails. They contain the GHDL
+      # reports that explain which check failed and why.
+      - name: Upload test logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-logs
+          path: .logs/
+          if-no-files-found: ignore
+          retention-days: 7

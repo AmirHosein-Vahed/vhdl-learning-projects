@@ -1,5 +1,7 @@
 # VHDL learning projects
 
+[![CI](https://github.com/AmirHosein-Vahed/vhdl-learning-projects/actions/workflows/ci.yml/badge.svg)](https://github.com/AmirHosein-Vahed/vhdl-learning-projects/actions/workflows/ci.yml)
+
 A flat, simulation-only collection of 14 industrial-style VHDL-2008 projects.
 Each project has synthesizable RTL, a self-checking testbench, a README, and a
 small Makefile. Everything runs with open tools: **GHDL** for simulation,
@@ -138,6 +140,18 @@ tests are safe. Do not run two analyses against the same `build/` concurrently.
 `make test` runs projects one at a time and captures output in
 `.logs/<project>.log`. It prints a compact PASS/FAIL summary and, on failure,
 the last lines of each failing log.
+
+### Continuous integration
+
+`.github/workflows/ci.yml` runs on every push and pull request:
+
+1. installs GHDL 5.0.1 (mcode) and GTKWave,
+2. runs `make check` and `make lint`,
+3. runs `make test`,
+4. uploads `.logs/` as an artifact when the job fails.
+
+It uses the same Make targets as a local run, so CI cannot drift from the
+commands documented above.
 
 ## GTKWave workflow
 
