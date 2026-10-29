@@ -10,7 +10,7 @@ small Makefile. Everything runs with open tools: **GHDL** for simulation,
 No vendor tools, no external IP, no vendor-specific primitives. The RTL is
 plain `ieee.std_logic_1164` + `ieee.numeric_std`.
 
-Current state: **5 of 14 projects complete** (01–05), all passing. See
+Current state: **6 of 14 projects complete** (01–06), all passing. See
 [`PROGRESS.md`](PROGRESS.md) for the live tracker, known gaps, and next moves.
 
 ## Prerequisites
@@ -179,7 +179,7 @@ practical order:
 | Control and DSP | 09, 10, 11, 12 | PWM, quadrature, FIR, PID |
 | Integration | 13, 14 | AXI4-Lite, UART sensor node capstone |
 
-Projects 01–05 are complete. The rest are planned; see the roadmap below.
+Projects 01–06 are complete. The rest are planned; see the roadmap below.
 
 ## Projects
 
@@ -190,7 +190,7 @@ Projects 01–05 are complete. The rest are planned; see the roadmap below.
 | `03-input-conditioning` | 2-FF synchronizer, debouncer, edge detect, pulse stretch | done |
 | `04-uart` | 8N1 TX/RX, 16× oversampling, framing/break errors | done |
 | `05-sync-fifo` | Parameterized FIFO, count/almost flags, backpressure | done |
-| `06-spi-master` | CPOL/CPHA modes 0–3, multi-slave CS | planned |
+| `06-spi-master` | CPOL/CPHA modes 0–3, multi-slave CS | done |
 | `07-i2c-master` | Master + EEPROM model, open-drain bus | planned |
 | `08-crc` | Generic CRC-8/16/32 streaming, standard vectors | planned |
 | `09-pwm-deadtime` | Complementary PWM, dead time, fault input | planned |
@@ -216,7 +216,7 @@ the table above and to `PROGRESS.md`.
 
 ## Roadmap
 
-1. Finish the remaining projects (05–14) in the order shown above.
+1. Finish the remaining projects (07–14) in the order shown above.
 2. Keep `PROGRESS.md` current: tracker, verification snapshot, next moves.
 3. Final acceptance: `make clean && make check && make lint && make test`,
    plus a waveform smoke test and a README/signal-list consistency pass.
