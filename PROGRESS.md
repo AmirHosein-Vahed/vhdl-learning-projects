@@ -1,0 +1,111 @@
+# PROGRESS
+
+Living status tracker for the VHDL learning repo. Update this file whenever a
+project, README, or build-system item changes state.
+
+- **Last updated:** 2026-10-29
+- **Overall:** 4 of 14 projects complete. Lessons 01–04 have RTL, testbenches,
+  and READMEs. Root `README.md` written. Lesson 05 not started.
+
+## Status at a glance
+
+| Area | State | Notes |
+|---|---|---|
+| Toolchain (`make check`) | done | GHDL 5.x mcode, GTKWave, GNU Make |
+| Root `Makefile` | done | `check list test lint wave clean new fmt` |
+| `mk/project.mk` | done | Per-project `build/`, explicit analysis order |
+| `lib/util_pkg.vhd` | done | `clog2`, `sat_signed`, `count_ones`, `is_power_of_two` |
+| `lib/tb_pkg.vhd` | done | Protected-type counters, checks, `wait_cycles`, summary |
+| `scripts/new-project.sh` | done | Scaffolds a compiling project |
+| Root `README.md` | done | Prereqs, quick start, layout, learning path, roadmap |
+| Projects 01–04 | done | RTL + TB + Makefile + README, all passing |
+| READMEs 01–04 | done | All four project docs complete |
+| Projects 05–14 | not started | See roadmap below |
+
+## Project tracker
+
+Legend: RTL = synthesizable sources, TB = self-checking testbench,
+Doc = project README.
+
+| # | Project | RTL | TB | Doc | Test | Checks |
+|---|---|---|---|---|---|---|
+| 01 | `01-combinational-basics` | done | done | done | PASS | 45 |
+| 02 | `02-counter-timer` | done | done | done | PASS | 14 |
+| 03 | `03-input-conditioning` | done | done | done | PASS | 14 |
+| 04 | `04-uart` | done | done | done | PASS | 19 |
+| 05 | `05-sync-fifo` | not started | — | — | — | — |
+| 06 | `06-spi-master` | not started | — | — | — | — |
+| 07 | `07-i2c-master` | not started | — | — | — | — |
+| 08 | `08-crc` | not started | — | — | — | — |
+| 09 | `09-pwm-deadtime` | not started | — | — | — | — |
+| 10 | `10-quadrature-decoder` | not started | — | — | — | — |
+| 11 | `11-fir-filter` | not started | — | — | — | — |
+| 12 | `12-pid-controller` | not started | — | — | — | — |
+| 13 | `13-axi-lite-regfile` | not started | — | — | — | — |
+| 14 | `14-uart-sensor-node` | not started | — | — | — | — |
+
+## Verification snapshot
+
+Last run: 2026-10-29
+
+```text
+make test   -> 4 passed, 0 failed
+make lint   -> all projects analyzed cleanly
+```
+
+Commands used:
+
+```sh
+make clean && make check && make lint && make test
+make test PROJECT=04-uart
+```
+
+## Known gaps / issues
+
+1. `05-sync-fifo` was scaffolded during an earlier session and then removed on
+   request; the folder is intentionally absent. Re-create with
+   `make new NAME=05-sync-fifo TITLE="Synchronous FIFO"`.
+2. No `.gtkw` layouts are shipped (by design); READMEs list hierarchical signal
+   paths and users save their own.
+3. Projects 05–14 are planned but not implemented.
+
+## Next moves
+
+Ordered, smallest useful increment first.
+
+1. **Lesson 05 — `05-sync-fifo`.** `sync_fifo` RTL (power-of-two depth,
+   registered read data, count/almost flags, simultaneous read/write) plus a
+   deterministic randomized scoreboard TB (LFSR stimulus, mirror queue).
+2. **Lessons 06–08.** SPI master (CPOL/CPHA 0–3, multi-slave CS), I2C master
+   with EEPROM model and open-drain bus, generic CRC-8/16/32 with standard
+   vectors.
+3. **Lessons 09–12.** PWM + dead time + fault, quadrature decoder x1/x2/x4,
+   symmetric fixed-point FIR with `valid`/`ready`, Q-format PID with
+   saturation and anti-windup.
+4. **Lessons 13–14.** AXI4-Lite register file with byte enables and master BFM;
+   UART sensor-node capstone reusing `../04-uart`, `../05-sync-fifo`,
+   `../08-crc` via explicit Makefile paths (do not copy RTL).
+5. **Clean sweep.** `make clean && make check && make lint && make test`, wave
+   smoke test, README/table/GTKWave-list consistency pass.
+
+## Update protocol
+
+When finishing an item:
+
+1. Flip its cell in the tracker (`not started` → `done`, `**todo**` → `done`).
+2. Update the check count from the test output (`N checks, TEST PASSED`).
+3. Refresh `Last updated` and the verification snapshot if commands were rerun.
+4. Add a line to the milestone log below.
+
+## Milestone log
+
+| Date | Change |
+|---|---|
+| 2026-10-29 | Foundation complete: root `Makefile`, `mk/project.mk`, `lib/`, scaffolder |
+| 2026-10-29 | Lessons 01–03 complete (RTL + TB + Makefile), all passing |
+| 2026-10-29 | Lesson 04 complete (UART TX/RX + TB + README), 19 checks |
+| 2026-10-29 | Removed half-started `05-sync-fifo` on request |
+| 2026-10-29 | Created this `PROGRESS.md` |
+| 2026-10-29 | Wrote project READMEs for 01, 02, 03; `make list` descriptions now populated |
+| 2026-10-29 | Wrote root `README.md` (prereqs, quick start, layout, build reference, roadmap) |
+| 2026-10-29 | Lessons 01–04 marked complete; full clean/check/lint/test passes |
