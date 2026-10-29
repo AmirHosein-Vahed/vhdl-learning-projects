@@ -1,0 +1,10 @@
+# Build artifacts
+build/
+.logs/
+*.ghw
+*.vcd
+*.fst
+
+# GHDL leftovers (normally inside build/)
+work-obj*.cf
+*.o
