@@ -10,7 +10,7 @@ small Makefile. Everything runs with open tools: **GHDL** for simulation,
 No vendor tools, no external IP, no vendor-specific primitives. The RTL is
 plain `ieee.std_logic_1164` + `ieee.numeric_std`.
 
-Current state: **4 of 14 projects complete** (01–04), all passing. See
+Current state: **5 of 14 projects complete** (01–05), all passing. See
 [`PROGRESS.md`](PROGRESS.md) for the live tracker, known gaps, and next moves.
 
 ## Prerequisites
@@ -179,7 +179,7 @@ practical order:
 | Control and DSP | 09, 10, 11, 12 | PWM, quadrature, FIR, PID |
 | Integration | 13, 14 | AXI4-Lite, UART sensor node capstone |
 
-Projects 01–04 are complete. The rest are planned; see the roadmap below.
+Projects 01–05 are complete. The rest are planned; see the roadmap below.
 
 ## Projects
 
@@ -189,7 +189,7 @@ Projects 01–04 are complete. The rest are planned; see the roadmap below.
 | `02-counter-timer` | Loadable up/down counter, retriggerable one-shot | done |
 | `03-input-conditioning` | 2-FF synchronizer, debouncer, edge detect, pulse stretch | done |
 | `04-uart` | 8N1 TX/RX, 16× oversampling, framing/break errors | done |
-| `05-sync-fifo` | Parameterized FIFO, count/almost flags, backpressure | planned |
+| `05-sync-fifo` | Parameterized FIFO, count/almost flags, backpressure | done |
 | `06-spi-master` | CPOL/CPHA modes 0–3, multi-slave CS | planned |
 | `07-i2c-master` | Master + EEPROM model, open-drain bus | planned |
 | `08-crc` | Generic CRC-8/16/32 streaming, standard vectors | planned |

@@ -4,8 +4,8 @@ Living status tracker for the VHDL learning repo. Update this file whenever a
 project, README, or build-system item changes state.
 
 - **Last updated:** 2026-10-29
-- **Overall:** 4 of 14 projects complete. Lessons 01–04 have RTL, testbenches,
-  and READMEs. Root `README.md` written. Lesson 05 not started.
+- **Overall:** 5 of 14 projects complete. Lessons 01–05 have RTL, testbenches,
+  and READMEs. Root `README.md` and CI are in place. Lesson 06 not started.
 
 ## Status at a glance
 
@@ -19,9 +19,9 @@ project, README, or build-system item changes state.
 | `scripts/new-project.sh` | done | Scaffolds a compiling project |
 | GitHub Actions CI | done | `.github/workflows/ci.yml`: check, lint, test on push/PR |
 | Root `README.md` | done | Prereqs, quick start, layout, learning path, roadmap |
-| Projects 01–04 | done | RTL + TB + Makefile + README, all passing |
-| READMEs 01–04 | done | All four project docs complete |
-| Projects 05–14 | not started | See roadmap below |
+| Projects 01–05 | done | RTL + TB + Makefile + README, all passing |
+| READMEs 01–05 | done | All five project docs complete |
+| Projects 06–14 | not started | See roadmap below |
 
 ## Project tracker
 
@@ -34,7 +34,7 @@ Doc = project README.
 | 02 | `02-counter-timer` | done | done | done | PASS | 14 |
 | 03 | `03-input-conditioning` | done | done | done | PASS | 14 |
 | 04 | `04-uart` | done | done | done | PASS | 19 |
-| 05 | `05-sync-fifo` | not started | — | — | — | — |
+| 05 | `05-sync-fifo` | done | done | done | PASS | 2577 |
 | 06 | `06-spi-master` | not started | — | — | — | — |
 | 07 | `07-i2c-master` | not started | — | — | — | — |
 | 08 | `08-crc` | not started | — | — | — | — |
@@ -50,7 +50,7 @@ Doc = project README.
 Last run: 2026-10-29
 
 ```text
-make test   -> 4 passed, 0 failed
+make test   -> 5 passed, 0 failed
 make lint   -> all projects analyzed cleanly
 ```
 
@@ -58,35 +58,29 @@ Commands used:
 
 ```sh
 make clean && make check && make lint && make test
-make test PROJECT=04-uart
+make test PROJECT=05-sync-fifo
 ```
 
 ## Known gaps / issues
 
-1. `05-sync-fifo` was scaffolded during an earlier session and then removed on
-   request; the folder is intentionally absent. Re-create with
-   `make new NAME=05-sync-fifo TITLE="Synchronous FIFO"`.
-2. No `.gtkw` layouts are shipped (by design); READMEs list hierarchical signal
+1. No `.gtkw` layouts are shipped (by design); READMEs list hierarchical signal
    paths and users save their own.
-3. Projects 05–14 are planned but not implemented.
+2. Projects 06–14 are planned but not implemented.
 
 ## Next moves
 
 Ordered, smallest useful increment first.
 
-1. **Lesson 05 — `05-sync-fifo`.** `sync_fifo` RTL (power-of-two depth,
-   registered read data, count/almost flags, simultaneous read/write) plus a
-   deterministic randomized scoreboard TB (LFSR stimulus, mirror queue).
-2. **Lessons 06–08.** SPI master (CPOL/CPHA 0–3, multi-slave CS), I2C master
+1. **Lessons 06–08.** SPI master (CPOL/CPHA 0–3, multi-slave CS), I2C master
    with EEPROM model and open-drain bus, generic CRC-8/16/32 with standard
    vectors.
-3. **Lessons 09–12.** PWM + dead time + fault, quadrature decoder x1/x2/x4,
+2. **Lessons 09–12.** PWM + dead time + fault, quadrature decoder x1/x2/x4,
    symmetric fixed-point FIR with `valid`/`ready`, Q-format PID with
    saturation and anti-windup.
-4. **Lessons 13–14.** AXI4-Lite register file with byte enables and master BFM;
+3. **Lessons 13–14.** AXI4-Lite register file with byte enables and master BFM;
    UART sensor-node capstone reusing `../04-uart`, `../05-sync-fifo`,
    `../08-crc` via explicit Makefile paths (do not copy RTL).
-5. **Clean sweep.** `make clean && make check && make lint && make test`, wave
+4. **Clean sweep.** `make clean && make check && make lint && make test`, wave
    smoke test, README/table/GTKWave-list consistency pass.
 
 ## Update protocol
@@ -111,3 +105,4 @@ When finishing an item:
 | 2026-10-29 | Wrote root `README.md` (prereqs, quick start, layout, build reference, roadmap) |
 | 2026-10-29 | Lessons 01–04 marked complete; full clean/check/lint/test passes |
 | 2026-10-29 | Added GitHub Actions CI (GHDL 5.0.1 mcode + GTKWave) on push/PR |
+| 2026-10-29 | Lesson 05 complete (sync FIFO + 2577-check scoreboard TB + README); 5/5 tests pass |
